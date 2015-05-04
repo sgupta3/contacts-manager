@@ -37,10 +37,6 @@ class ContactsController < ApplicationController
 		redirect_to contacts_path
 	end
 
-	
-
-	
-
 	private
 		def contact_params
 			params.require(:contact).permit(:first_name,:last_name,:email,:phone)
