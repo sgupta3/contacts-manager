@@ -1,0 +1,22 @@
+<p>
+	<strong>First Name</strong>
+	<%= @contact.first_name %>
+</p>
+<p>
+	<strong>Last Name</strong>
+	<%= @contact.last_name %>
+</p>
+<p>
+	<strong>Email</strong>
+	<%= @contact.email %>
+</p>
+<p>
+	<strong>Phone</strong>
+	<%= @contact.phone %>
+</p>
+<p>
+	<strong>Gravatar Image</strong>
+	<img src="https://s.gravatar.com/avatar/<%= @gravatar_email_hash  %>" />
+</p>
+
+<%= link_to 'View all contacts', contacts_path %>

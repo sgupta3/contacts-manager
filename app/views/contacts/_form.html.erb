@@ -1,0 +1,25 @@
+<%= form_for @contact do |f| %>
+  <p>
+    <%= f.label :first_name %><br>
+    <%= f.text_field :first_name %>
+  </p>
+ 
+  <p>
+    <%= f.label :last_name %><br>
+    <%= f.text_field :last_name %>
+  </p>
+
+  <p>
+    <%= f.label :email %><br>
+    <%= f.email_field :email %>
+  </p>
+
+  <p>
+    <%= f.label :phone %><br>
+    <%= f.number_field :phone %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
