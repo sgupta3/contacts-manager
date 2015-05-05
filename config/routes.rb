@@ -7,6 +7,10 @@ Rails.application.routes.draw do
 
   resources :contacts
 
+  resources :users
+
+  resources :sessions
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
