@@ -3,12 +3,17 @@ class ContactsController < ApplicationController
 	before_action :require_login
 	
 	def index
-		@contacts = Contact.all
+		@contacts = current_user.contacts.all
+		#@contacts = Contact.all
 	end
 
 	def show
-		@contact = Contact.find(params[:id])
-		@gravatar_email_hash = Digest::MD5.hexdigest(@contact.email)
+		@user = User.find( current_user.id )
+        @contact = Contact.find( params[:id] )
+        unless is_users_contact?( @user , @contact )
+            redirect_to contacts_path
+        end
+
 	end
 
 	def new
@@ -20,9 +25,8 @@ class ContactsController < ApplicationController
 	end
 
 	def create
-		@contact = Contact.new(contact_params)
-
-		@contact.save
+		@user = User.find(current_user.id)
+		@contact = @user.contacts.create(contact_params)
 		redirect_to @contact
 	end
 
@@ -51,4 +55,9 @@ class ContactsController < ApplicationController
             	redirect_to '/login'
        		 end
        	end
+
+     def is_users_contact?( user , contact )
+        user.id == contact.user_id
+    end
 end
+
