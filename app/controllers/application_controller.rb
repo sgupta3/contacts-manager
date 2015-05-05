@@ -7,7 +7,11 @@ class ApplicationController < ActionController::Base
   	def current_user
     	@current_user ||= User.find_by_email(session[:email]) if session[:email]
   	end
+
+  	def is_logged_in
+  	  current_user != nil
+  	end
   
-  helper_method :current_user
+  helper_method :current_user, :is_logged_in
 
 end

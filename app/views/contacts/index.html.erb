@@ -1,24 +1,31 @@
-<h1>All Contacts</h1>
-<table>
-	<tr>
-		<th>First Name</th>
-		<th>Last Name</th>
-		<th>Email</th>
-		<th>Phone</th>
-	</tr>
-	<% @contacts.each do |contact| %>
-		<tr>
-			<td><%= contact.first_name %></td>
-			<td><%= contact.last_name %></td>
-			<td><%= contact.email %></td>
-			<td><%= contact.phone %></td>
-			<td><%= link_to 'Show', contact_path(contact) %></td>
-       	    <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
-     	    <td><%= link_to 'Destroy', contact_path(contact),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
-		</tr>
-	<% end %>
-</table>
-<p><%= link_to 'New Contact', new_contact_path %>
-<p><%= link_to 'Logout', logout_path %></p>
+<div class="row col-md-8 col-md-offset-2">
+	<div class="panel panel-default">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">Contact Book  <%= link_to(raw('<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>'), new_contact_path, :class => 'text-right pull-right' )  %></h3>
+
+	  </div>
+	  <div class="panel-body">
+	 	<table class="table table-condensed">
+	 		<tr>	
+	 			<th></th>
+	 			<th>First Name</th>
+				<th>Last Name</th>
+				<th>Email</th>
+				<th>Phone</th>
+	 		</tr>
+	 		<% @contacts.each do |contact| %>
+				<tr>
+					
+					<td><%= link_to(raw('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'), contact_path(contact))  %></td>
+					<td><%= contact.first_name %></td>
+					<td><%= contact.last_name %></td>
+					<td><%= contact.email %></td>
+					<td><%= contact.phone %></td>	
+				</tr>
+			<% end %>
+		</table>
+	  </div>
+	</div>
+</div>
+
+

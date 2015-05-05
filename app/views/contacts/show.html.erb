@@ -1,22 +1,30 @@
-<p>
-	<strong>First Name</strong>
-	<%= @contact.first_name %>
-</p>
-<p>
-	<strong>Last Name</strong>
-	<%= @contact.last_name %>
-</p>
-<p>
-	<strong>Email</strong>
-	<%= @contact.email %>
-</p>
-<p>
-	<strong>Phone</strong>
-	<%= @contact.phone %>
-</p>
-<p>
-	<strong>Gravatar Image</strong>
-	<img src="https://s.gravatar.com/avatar/<%= Digest::MD5.hexdigest(@contact.email) %>">
-</p>
 
-<%= link_to 'View all contacts', contacts_path %>
+<div class="row">
+   <h5> <%= link_to(raw('<span class="glyphicon glyphicon-list" aria-hidden="true"></span> View all contacts'), contacts_path, :class => 'text-right pull-right' )  %></h5>
+</div>
+<br/>
+	<div class="row-fluid col-md-8 col-md-offset-2">
+    <div class="thumbnail">
+      	<%= link_to(raw('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>'), contact_path(@contact), :class => 'text-right pull-right',
+      		  :style => 'color:red',
+              method: :delete,
+              data: { confirm: 'Are you sure?' } )%>
+      	<img class="media-object" src="https://s.gravatar.com/avatar/<%= Digest::MD5.hexdigest(@contact.email) %>?s=200">
+
+      <div class="caption text-center">
+        <h3 class="media-heading"><%= @contact.first_name %> <%= @contact.last_name %></h3>
+        <h5><span style="vertical-align:middle" class="glyphicon glyphicon-globe" aria-hidden="true"></span> <%= @contact.email %></h5>
+     	 <h5><span style="vertical-align:middle" class="glyphicon glyphicon-phone" aria-hidden="true"></span> <%= @contact.phone %></h5>
+        <p><%= link_to 'Edit', edit_contact_path(@contact), :class => 'btn btn-primary'%></p>
+      </div>
+    </div>
+    </div>
+    
+
+
+
+
+
+
+
+
