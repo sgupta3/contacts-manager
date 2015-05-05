@@ -1,4 +1,7 @@
 class ContactsController < ApplicationController
+
+	before_action :require_login
+	
 	def index
 		@contacts = Contact.all
 	end
@@ -41,4 +44,11 @@ class ContactsController < ApplicationController
 		def contact_params
 			params.require(:contact).permit(:first_name,:last_name,:email,:phone)
 		end
+
+	private 
+		def require_login
+			unless current_user != nil
+            	redirect_to '/login'
+       		 end
+       	end
 end
