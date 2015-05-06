@@ -1,4 +1,4 @@
-##Contacts Manager
+#Contacts Manager
 ### A simple web application to manage your contacts.
 This is my first web application using rails. This was my first project assigned to me @Fluid Media Inc.
 
