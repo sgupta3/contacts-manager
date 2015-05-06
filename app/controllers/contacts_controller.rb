@@ -7,9 +7,8 @@ class ContactsController < ApplicationController
 	end
 
 	def show
-		@user = User.find( current_user.id )
-        @contact = Contact.find( params[:id] )
-        unless is_users_contact( @user , @contact )
+        @contact = current_user.contacts.find_by_id( params[:id] )
+        unless @contact
         	flash[:info] = "Oh snap! The contact doesn't exist in your contact book!"
             redirect_to contacts_path
         end
@@ -17,29 +16,31 @@ class ContactsController < ApplicationController
 	end
 
 	def new
-		@contact = Contact.new
+		@contact = current_user.contacts.new
 	end
 
 	def edit
-		@contact = Contact.find(params[:id])
+		@contact = current_user.contacts.find_by_id(params[:id])
+		 unless @contact
+        	flash[:info] = "Oh snap! The contact doesn't exist in your contact book!"
+            redirect_to contacts_path
+        end
 	end
 
 	def create
-		@user = User.find(current_user.id)
-		@contact = @user.contacts.create(contact_params)
+		@contact = current_user.contacts.create(contact_params)
 		redirect_to @contact
 	end
 
 	def update
-		@contact = Contact.find(params[:id])
-
+		@contact = current_user.contacts.find(params[:id])
 		if @contact.update(contact_params)
     		redirect_to @contact
     	end
 	end
 
 	def destroy 
-		@contact = Contact.find(params[:id])
+		@contact = current_user.contacts.find(params[:id])
 		@contact.destroy
 		redirect_to contacts_path
 	end
@@ -55,9 +56,5 @@ class ContactsController < ApplicationController
             	redirect_to '/login'
        		 end
        	end
-
-     def is_users_contact( user , contact )
-        user.id == contact.user_id
-    end
 end
 
