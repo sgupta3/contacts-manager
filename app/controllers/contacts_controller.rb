@@ -10,7 +10,7 @@ class ContactsController < ApplicationController
 	def show
 		@user = User.find( current_user.id )
         @contact = Contact.find( params[:id] )
-        unless is_users_contact?( @user , @contact )
+        unless is_users_contact( @user , @contact )
             redirect_to contacts_path
         end
 
@@ -51,12 +51,12 @@ class ContactsController < ApplicationController
 
 	private 
 		def require_login
-			unless current_user != nil
+			if current_user == nil
             	redirect_to '/login'
        		 end
        	end
 
-     def is_users_contact?( user , contact )
+     def is_users_contact( user , contact )
         user.id == contact.user_id
     end
 end
