@@ -11,7 +11,7 @@ class ContactsController < ApplicationController
 		@user = User.find( current_user.id )
         @contact = Contact.find( params[:id] )
         unless is_users_contact( @user , @contact )
-        	flash[:info] = "The contact doesn't exist in your contact book!"
+        	flash[:info] = "Oh snap! The contact doesn't exist in your contact book!"
             redirect_to contacts_path
         end
 
